@@ -42,9 +42,9 @@
         <div class="section__text">
             <p class="section__text__p1">Hello I'm</p>
             <h1 class="title">Antony Aakash S</h1>
-            <p class="section__text__p2">Software Engineer</p>
+            <p class="section__text__p2">Python Developer</p>
             <div class="btn-container">
-                <button class="btn btn-color-2" onclick="window.open('./assets/ANTONY AAKASH s.pdf')">Download CV</button>
+                <button class="btn btn-color-2" onclick="window.open('./assets/AntonyAakashResume.pdf')">Download CV</button>
                 <button class="btn btn-color-1" onclick="location.href='./#contact'">Contact Info</button>
             </div>
             <div id="socials-container">
@@ -91,11 +91,25 @@
         <h1 class="title">Experience</h1>
         <div class="experience-detail-container">
             <div class="about-container">
-                <div class="details-container"> <!-- Fixed class name -->
+                <div class="details-container"> 
                     <h2 class="experience-sub-title">
-                        Frontend Development
+                        Programming Languages
                     </h2>
                     <div class="article-container">
+                        <article>
+                            <img src="./assets/checkmark.png" alt="experience icon" class="icon">
+                            <div>
+                                <h3>Python</h3>
+                                <p>Intermediate</p>
+                            </div>
+                        </article>
+                        <article>
+                            <img src="./assets/checkmark.png" alt="experience icon" class="icon">
+                            <div>
+                                <h3>JavaScript</h3>
+                                <p>Beginner</p>
+                            </div>
+                        </article>
                         <article>
                             <img src="./assets/checkmark.png" alt="experience icon" class="icon">
                             <div>
@@ -113,15 +127,29 @@
                         <article>
                             <img src="./assets/checkmark.png" alt="experience icon" class="icon">
                             <div>
-                                <h3>JavaScript</h3>
-                                <p>Beginner</p>
+                                <h3>SQL</h3>
+                                <p>Intermediate</p>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+                <div class="details-container"> 
+                    <h2 class="experience-sub-title">
+                        Frameworks & Technologies
+                    </h2>
+                    <div class="article-container">
+                        <article>
+                            <img src="./assets/checkmark.png" alt="experience icon" class="icon">
+                            <div>
+                                <h3>Django</h3>
+                                <p>Intermediate</p>
                             </div>
                         </article>
                         <article>
                             <img src="./assets/checkmark.png" alt="experience icon" class="icon">
                             <div>
-                                <h3>Python</h3>
-                                <p>Intermediate</p>
+                                <h3>Flask</h3>
+                                <p>Basics</p>
                             </div>
                         </article>
                         <article>
@@ -138,32 +166,11 @@
                                 <p>Intermediate</p>
                             </div>
                         </article>
-                    </div>
-                </div>
-                <div class="details-container"> 
-                    <h2 class="experience-sub-title">
-                        Backend Development
-                    </h2>
-                    <div class="article-container">
                         <article>
                             <img src="./assets/checkmark.png" alt="experience icon" class="icon">
                             <div>
-                                <h3>SQL</h3>
-                                <p>Basics</p>
-                            </div>
-                        </article>
-                        <article>
-                            <img src="./assets/checkmark.png" alt="experience icon" class="icon">
-                            <div>
-                                <h3>Flask</h3>
-                                <p>Basics</p>
-                            </div>
-                        </article>
-                        <article>
-                            <img src="./assets/checkmark.png" alt="experience icon" class="icon">
-                            <div>
-                                <h3>Docker</h3>
-                                <p>Basics</p>
+                                <h3>MongoDB</h3>
+                                <p>Beginner</p>
                             </div>
                         </article>
                         <article>
@@ -180,6 +187,13 @@
                                 <p>Intermediate</p>
                             </div>
                         </article>
+                        <article>
+                            <img src="./assets/checkmark.png" alt="experience icon" class="icon">
+                            <div>
+                                <h3>Bootstrap</h3>
+                                <p>Basics</p>
+                            </div>
+                        </article>
                     </div>
                 </div>
             </div>
@@ -189,27 +203,50 @@
     <section id="project">
         <p class="section__text__p1">Browse My Recent</p>
         <h1 class="title">Projects</h1>
-        <div class="experience-detail-container">
-            <div class="about-container">
-                <div class="details-container color-container">
-                    <div class="article-container">
-                        <img src="./assets/HostelManagement.png" alt="project 1" class="project-img">
+        <div class="slider-container">
+            <button class="slider-btn prev-btn" onclick="previousSlide()">❮</button>
+            <div class="slider-wrapper">
+                <div class="slider-track" id="sliderTrack">
+                    <div class="slide-group">
+                        <div class="details-container color-container slide">
+                            <div class="article-container">
+                                <img src="./assets/HostelManagement.png" alt="project 1" class="project-img">
+                            </div>
+                            <h2 class="experience-sub-title project-title">Hostel Automation System</h2>
+                            <div class="btn-container">
+                                <button class="btn btn-color-2 project-btn" onclick="location.href='https://github.com/AakashAS25/SXCCEHOSTEL'">Github</button>
+                            </div>
+                        </div>
+                        <div class="details-container color-container slide">
+                            <div class="article-container">
+                                <img src="./assets/survey form.png" alt="project 2" class="project-img">
+                            </div>
+                            <h2 class="experience-sub-title project-title">Survey Form Design</h2>
+                            <div class="btn-container">
+                                <button class="btn btn-color-2 project-btn" onclick="location.href='https://www.freecodecamp.org/learn/2022/responsive-web-design/learn-typography-by-building-a-nutrition-label/step-68'">FreeCodeCamp</button>
+                            </div>
+                        </div>
                     </div>
-                    <h2 class="experience-sub-title project-title">Hostel Automation System</h2>
-                    <div class="btn-container">
-                        <button class="btn btn-color-2 project-btn" onclick="location.href='https://github.com/AakashAS25/SXCCEHOSTEL'">Github</button>
-                    </div>
-                </div>
-                <div class="details-container color-container">
-                    <div class="article-container">
-                        <img src="./assets/survey form.png" alt="project 2" class="project-img">
-                    </div>
-                    <h2 class="experience-sub-title project-title">Survey Form Design</h2>
-                    <div class="btn-container">
-                        <button class="btn btn-color-2 project-btn" onclick="location.href='https://www.freecodecamp.org/learn/2022/responsive-web-design/learn-typography-by-building-a-nutrition-label/step-68'">FreeCodeCamp</button>
+                    <div class="slide-group">
+                        <div class="details-container color-container slide">
+                            <div class="article-container">
+                                <img src="./assets/djangoCRM.png" alt="project 3" class="project-img">
+                            </div>
+                            <h2 class="experience-sub-title project-title">Django CRM Application</h2>
+                            <div class="btn-container">
+                                <button class="btn btn-color-2 project-btn" onclick="location.href='https://github.com/AakashAS25/DjangoCRM'">Github</button>
+                            </div>
+                        </div>
+                        <!-- Empty space for future 4th project -->
                     </div>
                 </div>
             </div>
+            <button class="slider-btn next-btn" onclick="nextSlide()">❯</button>
+        </div>
+        <div class="slider-dots">
+            <span class="dot active" onclick="currentSlide(1)"></span>
+            <span class="dot" onclick="currentSlide(2)"></span>
+            <span class="dot" onclick="currentSlide(3)"></span>
         </div>
         <img src="./assets/arrow.png" alt="arrow icon" class="icon arrow" onclick="location.href='./#contact'">
     </section>

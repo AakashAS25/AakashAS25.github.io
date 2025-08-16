@@ -326,20 +326,27 @@ Experiece section */
     flex-direction: column;
 }
 
+.about-container{
+    gap: 2rem;
+    margin-bottom: 2rem;
+    margin-top: 2rem;
+}
+
 .article-container{
     display: flex;
     text-align: initial;
     flex-wrap: wrap;
     flex-direction: row;
-    gap: 2.5rem;
-    justify-content: space-around;
+    gap: 1.5rem;
+    justify-content: space-between;
 }
 
 article{
     display: flex;
     width: 10rem;
-    justify-content: space-around;
+    justify-content: flex-start;
     gap: 0.5rem;
+    align-items: center;
 }
 
 article.icon{
@@ -358,19 +365,249 @@ article.icon{
 }
 
 .project-img{
-    border-radius: 2rem;
-    width: 90%;
-    height: 90%;
+    border-radius: 0;
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    object-position: center;
 }
 
 .project-title{
     margin: 1rem;
     color: black;
+    font-size: 1.5rem;
+    min-height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
 }
 
 .project-btn{
     color: black;
     border-color: rgb(163, 163, 163);
+    margin-top: auto;
+}
+
+.slide .btn-container {
+    margin-top: auto;
+    padding: 1rem;
+}
+
+/* Mobile specific project styles */
+@media screen and (max-width: 768px) {
+    #project {
+        margin: 0 2rem;
+    }
+    
+    .title {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+    }
+    
+    .section__text__p1 {
+        font-size: 1rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .slider-dots {
+        margin-top: 2rem;
+    }
+    
+    .dot {
+        height: 12px;
+        width: 12px;
+        margin: 0 3px;
+    }
+}
+
+/* Slider Styles */
+.slider-container {
+    position: relative;
+    overflow: hidden;
+    width: 85%;
+    margin: 2rem auto;
+    display: flex;
+    align-items: center;
+    padding: 0 60px;
+}
+
+.slider-wrapper {
+    width: 100%;
+    overflow: hidden;
+    cursor: grab;
+    touch-action: pan-y pinch-zoom;
+}
+
+.slider-wrapper:active {
+    cursor: grabbing;
+}
+
+.slider-track {
+    display: flex;
+    width: 200%; /* 2 slide groups */
+    transition: transform 0.5s ease-in-out;
+}
+
+.slide-group {
+    flex: 0 0 50%; /* Each group takes 50% of track */
+    display: flex;
+    gap: 1.5rem;
+    padding: 0 0.5rem;
+}
+
+.slide {
+    flex: 1; /* Each slide takes equal space within the group */
+    min-height: 400px;
+    transition: transform 0.3s ease;
+    box-sizing: border-box;
+    max-width: 48%;
+    display: flex;
+    flex-direction: column;
+}
+
+.slide .article-container {
+    height: 250px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-radius: 0;
+    margin-bottom: 1rem;
+}
+
+/* Mobile Responsive Design */
+@media screen and (max-width: 768px) {
+    .slider-container {
+        width: 90%;
+        padding: 0; /* Remove padding since no buttons */
+        margin: 1rem auto;
+    }
+    
+    /* Hide navigation buttons on mobile */
+    .slider-btn {
+        display: none;
+    }
+    
+    .slider-track {
+        width: 200%; /* Keep original 2 groups for desktop compatibility */
+    }
+    
+    .slide-group {
+        flex: 0 0 50%; /* Each group is 50% for original desktop layout */
+        flex-direction: column;
+        gap: 0;
+        padding: 0;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .slide {
+        max-width: 85%;
+        min-height: 380px;
+        margin: 0 auto;
+        width: 85%;
+    }
+    
+    /* Mobile: Show only one slide at a time based on current index */
+    .slide-group .slide {
+        display: none; /* Hide all slides by default on mobile */
+    }
+    
+    /* Show slides based on JavaScript index */
+    .slide-group:first-child .slide:first-child {
+        display: flex; /* Default: show first project */
+    }
+    
+    .slide .article-container {
+        height: 220px;
+    }
+    
+    .project-img {
+        height: 220px;
+    }
+    
+    .project-title {
+        font-size: 1.4rem;
+        min-height: 60px;
+        padding: 0 0.5rem;
+    }
+    
+    /* Style dots for mobile */
+    .slider-dots {
+        margin-top: 2rem;
+        text-align: center;
+    }
+    
+    .dot {
+        height: 15px;
+        width: 15px;
+        margin: 0 8px;
+        background-color: #bbb;
+        border-radius: 50%;
+        display: inline-block;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+    
+    .dot:hover, .dot.active {
+        background-color: #717171;
+    }
+}
+
+.slide:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Navigation Buttons */
+.slider-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(53, 53, 53, 0.8);
+    color: white;
+    border: none;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    font-size: 16px;
+    cursor: pointer;
+    z-index: 10;
+    transition: background-color 0.3s ease;
+}
+
+.slider-btn:hover {
+    background-color: rgba(53, 53, 53, 1);
+}
+
+.prev-btn {
+    left: 10px;
+}
+
+.next-btn {
+    right: 10px;
+}
+
+/* Dots Navigation */
+.slider-dots {
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.dot {
+    height: 15px;
+    width: 15px;
+    margin: 0 5px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.dot:hover, .dot.active {
+    background-color: #717171;
 }
 
 /* Contact Section */
