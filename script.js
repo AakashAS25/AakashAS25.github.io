@@ -176,4 +176,48 @@ document.addEventListener('DOMContentLoaded', function() {
         currentSlideIndex = 0;
         updateSlider();
     });
+
+    // Chat widget toggle
+    const chatToggle = document.getElementById('chat-toggle');
+    const chatPopup = document.getElementById('chat-popup');
+    const chatClose = document.getElementById('chat-close');
+
+    if (chatToggle && chatPopup) {
+        chatToggle.addEventListener('click', () => {
+            const isOpen = chatPopup.classList.toggle('open');
+            chatToggle.setAttribute('aria-expanded', String(isOpen));
+            if (isOpen) {
+                const iframe = document.getElementById('chat-iframe');
+                if (iframe && !iframe.src) {
+                    const url = iframe.getAttribute('data-src');
+                    if (url) iframe.src = url;
+                }
+            }
+        });
+    }
+
+    if (chatClose && chatPopup) {
+        chatClose.addEventListener('click', () => {
+            chatPopup.classList.remove('open');
+            chatToggle && chatToggle.setAttribute('aria-expanded', 'false');
+        });
+    }
+
+    // Close on ESC
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && chatPopup && chatPopup.classList.contains('open')) {
+            chatPopup.classList.remove('open');
+            chatToggle && chatToggle.setAttribute('aria-expanded', 'false');
+        }
+    });
+
+    // Close when clicking outside the popup (but not when interacting with iframe)
+    document.addEventListener('click', (e) => {
+        if (!chatPopup || !chatPopup.classList.contains('open')) return;
+        const withinWidget = e.target.closest('#chat-widget');
+        if (!withinWidget) {
+            chatPopup.classList.remove('open');
+            chatToggle && chatToggle.setAttribute('aria-expanded', 'false');
+        }
+    });
 });

@@ -279,6 +279,28 @@
         </nav>
         <p>© 2025 Antony Aakash S. All rights reserved.</p>
     </footer>
+
+    <!-- Floating Chatbot Widget -->
+    <div id="chat-widget" class="chat-widget" aria-live="polite">
+        <button id="chat-toggle" class="chat-toggle" aria-haspopup="dialog" aria-controls="chat-popup" aria-expanded="false" title="Chat with me">
+            <span class="chat-toggle-emoji" aria-hidden="true">🤖</span>
+            <span class="sr-only">Open chat</span>
+        </button>
+        <div id="chat-popup" class="chat-popup" role="dialog" aria-label="AI Chatbot" aria-modal="false">
+            <div class="chat-popup-header">
+                <div class="chat-popup-title">AI Assistant</div>
+                <button id="chat-close" class="chat-close" aria-label="Close chat">×</button>
+            </div>
+            <iframe
+                id="chat-iframe"
+                title="AI Chatbot"
+                data-src="http://127.0.0.1:5000/"
+                loading="lazy"
+                referrerpolicy="no-referrer"
+                allow="clipboard-write"
+            ></iframe>
+        </div>
+    </div>
     <script src="script.js"></script>
 </body>
 </html>
