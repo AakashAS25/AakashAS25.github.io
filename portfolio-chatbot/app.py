@@ -118,7 +118,7 @@ except TypeError:
 def home():
     """Renders the main chat page."""
     # Send the first message from the model to the frontend
-    initial_bot_message = "Hello! I'm Antony's virtual assistant. I can answer questions about his skills, experience, and projects. How can I help you today?"
+    initial_bot_message = "Hello! I'm Aakash's virtual assistant. I can answer questions about his skills, experience, and projects. How can I help you today?"
     return render_template("index.html", initial_message=initial_bot_message)
 
 @app.route("/send_message", methods=["POST"])
