@@ -2,6 +2,7 @@ import os
 from flask import Flask, render_template, request, jsonify
 import google.generativeai as genai
 from dotenv import load_dotenv
+import re
 
 # Load environment variables from .env file
 load_dotenv()
@@ -26,17 +27,17 @@ except (ValueError, AttributeError) as e:
 # System instruction with your resume information
 # This tells the AI how to behave and gives it your data.
 system_instruction = """
-You are a friendly and professional chatbot assistant for Antony Aakash S.
-Your role is to answer questions about Antony based ONLY on the information provided below.
-Do not make up any information. If a question is asked that cannot be answered with the provided information,
-politely say that you don't have that information.
+You are a friendly and professional chatbot assistant for User.
+Answer ONLY using the information provided below.
+Never output phone numbers. If asked for a phone number, reply exactly:
+"Phone number not available."
+If any phone-like number appears in context, replace it with [redacted phone].
 
 Here is Antony Aakash S's resume information:
 ---
 Name: Antony Aakash S
 Contact:
 - Mail: aakash2005s@gmail.com
-- Phone: +91 7010711848
 - Portfolio: www.aakashas25.github.io/antony-aakash-s/
 - Linkedin: antony-aakash-s
 - Github: AakashAS25
@@ -84,6 +85,19 @@ Start the conversation by introducing yourself and asking how you can help. Do n
 # You can override via .env: GEMINI_MODEL=gemini-1.5-pro (or any supported)
 MODEL_NAME = os.getenv("GEMINI_MODEL", "gemini-1.5-flash")
 
+PHONE_CANDIDATE = re.compile(r'(\+?\d[\d\-\s\(\)]{8,}\d)')  # matches sequences likely to be phone numbers
+
+
+def redact_phone_numbers(text: str) -> str:
+    if not text:
+        return text
+    def _repl(m):
+        digits = re.sub(r'\D', '', m.group(0))
+        # treat as phone if it has 10–15 digits
+        return "[redacted phone]" if 10 <= len(digits) <= 15 else m.group(0)
+    return PHONE_CANDIDATE.sub(_repl, text)
+
+
 try:
     # Prefer using system_instruction if the installed SDK supports it
     model = genai.GenerativeModel(
@@ -109,18 +123,22 @@ def home():
 
 @app.route("/send_message", methods=["POST"])
 def send_message():
-    """Receives a user message and returns the chatbot's response."""
     user_message = request.json.get("message")
     if not user_message:
         return jsonify({"error": "Message cannot be empty"}), 400
 
     try:
-        response = chat.send_message(user_message)
-        # Access the response text safely
+        # Redact any phone numbers from user input before sending to the model
+        safe_user_message = redact_phone_numbers(user_message)
+
+        response = chat.send_message(safe_user_message)
         text = getattr(response, "text", None) or "Sorry, I couldn't generate a response right now. Please try again."
+
+        # Redact any phone numbers from the model output before returning to the client
+        text = redact_phone_numbers(text)
+
         return jsonify({"response": text})
     except Exception as e:
-        # Log the detailed error to the console for debugging
         print(f"Error communicating with Gemini API: {e}")
         return jsonify({"error": "Problem connecting to the AI service. Please try again later."}), 500
 
