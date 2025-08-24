@@ -1,0 +1,18 @@
+FROM docker.io/library/nginx:1.27-alpine
+
+WORKDIR /usr/share/nginx/html
+
+# Copy static site from frontend directory (HTML/CSS/JS)
+COPY frontend/index.html ./
+COPY frontend/style.css ./
+COPY frontend/mediaqueries.css ./
+COPY frontend/script.js ./
+COPY frontend/assets ./assets
+# Copy shared assets from repo root
+# If you keep images under frontend/assets, they will be copied by the lines above.
+# To copy a repo-root assets folder instead, move it to frontend/assets or add a copy step back.
+
+# Nginx config to proxy /chat/ to backend service
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
+EXPOSE 80

@@ -7,7 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/chat.css') }}?v=2">
+    <link rel="stylesheet" href="/chat{{ url_for('static', filename='css/chat.css') }}?v=2">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🤖</text></svg>">
     <meta name="color-scheme" content="light dark">
     <meta name="theme-color" content="#5b5bd6">
@@ -47,6 +47,9 @@
         <script>
             window.INITIAL_MSG = {{ (initial_message or "Hello! I'm Antony's virtual assistant. Ask me anything about his skills, experience, or projects.") | tojson }};
         </script>
-        <script src="{{ url_for('static', filename='js/chat.js') }}?v=2" defer></script>
+        <script>
+            window.API_BASE = '/chat';
+        </script>
+        <script src="/chat{{ url_for('static', filename='js/chat.js') }}?v=2" defer></script>
 </body>
 </html>
