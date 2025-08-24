@@ -7,20 +7,23 @@ import re
 # Load environment variables from .env file
 load_dotenv()
 
+# Allow both GEMINI_API_KEY and generic API_KEY
+API_KEY = os.getenv("API_KEY")
+
 app = Flask(__name__)
 
 # --- Start of Changes ---
 
 # Configure the Gemini API key
 try:
-    api_key = os.environ.get("GEMINI_API_KEY")
+    api_key = os.getenv("GEMINI_API_KEY") or API_KEY
     if not api_key:
-        raise ValueError("GEMINI_API_KEY not found in .env file.")
+        raise ValueError("GEMINI_API_KEY or API_KEY is not set in environment.")
     genai.configure(api_key=api_key)
 except (ValueError, AttributeError) as e:
     print("--------------------------------------------------")
     print(f"Error: {e}")
-    print("Please ensure you have a .env file with a valid GEMINI_API_KEY.")
+    print("Set GEMINI_API_KEY (preferred) or API_KEY locally in .env, or in Azure App Settings.")
     print("--------------------------------------------------")
     exit()
 
@@ -141,6 +144,10 @@ def send_message():
     except Exception as e:
         print(f"Error communicating with Gemini API: {e}")
         return jsonify({"error": "Problem connecting to the AI service. Please try again later."}), 500
+    
+@app.get("/healthz")
+def healthz():
+    return {"status": "ok"}
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=int(os.getenv("PORT", 5000)), debug=True)
