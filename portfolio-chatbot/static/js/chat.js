@@ -65,7 +65,8 @@ $form?.addEventListener('submit', async (e)=>{
   addMsg({text, role:'user'}); $input.value=''; $input.style.height='44px';
   addTyping();
   try{
-    const res = await fetch('/send_message', {
+  const base = (typeof window !== 'undefined' && window.API_BASE) ? window.API_BASE : '';
+  const res = await fetch(`${base}/send_message`, {
       method:'POST', headers:{'Content-Type':'application/json'},
       body: JSON.stringify({message: text})
     });

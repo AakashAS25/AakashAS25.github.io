@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+.git/
+.gitignore
+Dockerfile*
+node_modules/
+**/.DS_Store
+**/Thumbs.db
+README.md
